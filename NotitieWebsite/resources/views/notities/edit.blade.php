@@ -9,7 +9,7 @@
                 <div class="panel-body">{{$notitie->body}}</div>
             </div>
         </div>
-            @if((Auth::user()->id) === ($notitie->user->id))
+            @if((Auth::id()) == ($notitie->user->id))
                 <form method="POST" action="{{$notitie->id}}/update" class="col-md-8 col-md-offset-2">
                     {{method_field('PATCH')}}
 
@@ -27,8 +27,15 @@
             @else
                 <a href="{{url('')}}/home" class="btn btn-primary">Home</a>
             @endif
-
-        
+        <div class="col-md-8 col-md-offset-2">
+	    @if(count($errors))
+            	<ul>
+                	@foreach($errors->all() as $error)
+                    		<li>{{$error}}</li>
+                	@endforeach
+            	</ul>
+        @endif
+	
     </div>
 </div>
 @endsection

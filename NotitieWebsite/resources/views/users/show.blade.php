@@ -14,7 +14,7 @@
                     <div class="panel-body">
                         {{$note->body}}
 
-                            @if((Auth::user()->id) === ($note->user_id))
+                            @if((Auth::id()) == ($note->user_id))
                                 <div class="pull-right">
                                     <a href="{{url('')}}/notitie/{{$note->id}}" class="btn btn-primary">Edit</a>
                                     <tb>
@@ -29,7 +29,7 @@
             </div>
         @endforeach
 
-        @if((Auth::user()->id) === ($note->user_id))
+        @if((Auth::id()) == ($note->user_id))
             <form method="POST" action="{{url('')}}/notitie/{{Auth::user()->id}}" class="col-md-8 col-md-offset-2">
                 <div class="form-group">
                     <textarea name="body" class="form-control" required>{{old('body')}}</textarea>
@@ -44,6 +44,15 @@
                 <a href="{{url('')}}/home" class="btn btn-primary">Home</a>
             </div>
         @endif
+	<div class="col-md-8 col-md-offset-2">
+        	@if(count($errors))
+            		<ul>
+                		@foreach($errors->all() as $error)
+                    			<li>{{$error}}</li>
+               			@endforeach
+            		</ul>
+        	@endif
+	</div>
     </div>
 </div>
 @endsection

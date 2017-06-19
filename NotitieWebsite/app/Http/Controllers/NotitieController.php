@@ -18,10 +18,10 @@ class NotitieController extends Controller
     public function store(Request $request, User $user)
     {
         $this->validate($request,[
-            'body' => 'required|min:10'
-        ]);
+                'body' => 'required|min:10'
+            ]);
 
-        $notitie = $user->notities()->create($request->all());
+	$notitie = $user->notities()->create($request->all());
 
     	return back();
     }
@@ -35,6 +35,10 @@ class NotitieController extends Controller
 
     public function update(Request $request,Notitie $notitie)
     {
+        $this->validate($request,[
+                'body' => 'required|min:10'
+            ]);
+
         $notitie->update($request->all());
         
         return back();
@@ -44,7 +48,7 @@ class NotitieController extends Controller
     {  
 
 
-        if((Auth::user()->id) === ($notitie->user_id) )
+        if((Auth::user()->id) == ($notitie->user_id) )
         {
             $notitie->delete();
             return redirect('/home');

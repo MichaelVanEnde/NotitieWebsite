@@ -14,7 +14,7 @@
                     <div class="panel-body">
                         {{$note->body}}
 
-                            @if((Auth::user()->id) === ($note->user->id))
+                            @if((Auth::id()) === ($note->user->id))
                                 <div class="pull-right">
                                     <a href="notitie/{{$note->id}}" class="btn btn-primary">Edit</a>
                                     <tb>
@@ -37,14 +37,15 @@
                 <button type="submit" class="btn btn-primary" name="_token" value="{{csrf_token()}}">submit</button>
             </div>
         </form>
-
-        @if(count($errors))
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        @endif
+	<div class="col-md-8 col-md-offset-2">
+        	@if(count($errors))
+            		<ul>
+                		@foreach($errors->all() as $error)
+                    			<li>{{$error}}</li>
+               			@endforeach
+            		</ul>
+        	@endif
+	</div>
     </div>
 </div>
 @endsection
