@@ -18,12 +18,10 @@ class NotitieController extends Controller
     public function store(Request $request, User $user)
     {
         $this->validate($request,[
-                'body' => 'required|min:10'
-            ]);
+            'body' => 'required|min:10'
+        ]);
 
-    	$notitie = new Notitie($request->all());
-
-    	$user->addNotitie($notitie,1);
+        $notitie = $user->notities()->create($request->all());
 
     	return back();
     }

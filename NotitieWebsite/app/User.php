@@ -32,11 +32,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notitie::class);
     }
-
-    public function addNotitie(Notitie $notitie, $userid)
-    {
-        $notitie->user_id = $userid;
-        
-        return $this->notities()->save($notitie);
-    }
 }
